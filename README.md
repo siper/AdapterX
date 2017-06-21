@@ -4,7 +4,7 @@ This is a simple multiview adapter for RecyclerView written on Kotlin
 
 # Installation
 
-1. Add the JitPack repository to your build file
+### 1. Add the JitPack repository to your build file
 ```
 allprojects {
 	repositories {
@@ -13,7 +13,7 @@ allprojects {
 	}
 }
 ```
-2. Add the dependency
+### 2. Add the dependency
 ```
 dependencies {
 	compile 'com.github.siper:AdapterX:-SNAPSHOT'
@@ -22,7 +22,7 @@ dependencies {
 
 # Usage
 
-1. Create your ViewHolder
+### 1. Create your ViewHolder
 ```
 class ViewHolder1(itemView: View?, item: Item1): ViewHolderX(itemView, item) {
     val title: TextView?
@@ -31,7 +31,7 @@ class ViewHolder1(itemView: View?, item: Item1): ViewHolderX(itemView, item) {
     }
 }
 ```
-2. Create you own item
+### 2. Create you own item
 ```
 class Item1(context: Context) : ItemX<ViewHolder1>() {
     val context: Context
@@ -55,7 +55,7 @@ class Item1(context: Context) : ItemX<ViewHolder1>() {
     override fun createView(parent: View): RecyclerView.ViewHolder = ViewHolder1(parent, this)
 }
 ```
-3. Init you adapter and add items
+### 3. Init you adapter and add items
 ```
 var adapter: AdapterX = AdapterX()
 recyclerView.adapter = adapter
