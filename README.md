@@ -7,16 +7,16 @@ This is a simple multiview adapter for RecyclerView written on Kotlin
 1. Add the JitPack repository to your build file
 ```
 allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 2. Add the dependency
 ```
 dependencies {
-	        compile 'com.github.siper:AdapterX:-SNAPSHOT'
+	compile 'com.github.siper:AdapterX:-SNAPSHOT'
 }
 ```
 
