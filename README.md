@@ -16,7 +16,7 @@ allprojects {
 ### 2. Add the dependency
 ```
 dependencies {
-	compile 'com.github.siper:AdapterX:-SNAPSHOT'
+	compile 'com.github.siper:AdapterX:1.0'
 }
 ```
 
