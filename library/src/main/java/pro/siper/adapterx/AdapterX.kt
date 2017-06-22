@@ -53,4 +53,9 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             registredViews.remove(item.getLayout())
         }
     }
+
+    fun unRegiterAllViewTypes() {
+        registredViews.clear()
+    }
+    
 }
