@@ -1,6 +1,6 @@
 # AdapterX
 
-This is a simple multiview adapter for RecyclerView written on Kotlin
+Simple multiview adapter for RecyclerView written on Kotlin
 
 # Installation
 
