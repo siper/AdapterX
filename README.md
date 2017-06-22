@@ -1,4 +1,4 @@
-# AdapterX [![Build Status](https://travis-ci.org/AlokBansal8/UtilityClasses.svg?branch=master)](https://travis-ci.org/AlokBansal8/UtilityClasses)
+# AdapterX [![Build Status](https://travis-ci.org/siper/AdapterX.svg?branch=master)](https://travis-ci.org/siper/AdapterX)
 
 Simple multiview adapter for RecyclerView written on Kotlin
 
