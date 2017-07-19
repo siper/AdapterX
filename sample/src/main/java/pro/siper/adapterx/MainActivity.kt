@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
+        val recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        var adapter: AdapterX = AdapterX()
+        val adapter: AdapterX = AdapterX()
         recyclerView.adapter = adapter
         adapter.addItem(Item1(this))
         adapter.addItem(Item2(this))

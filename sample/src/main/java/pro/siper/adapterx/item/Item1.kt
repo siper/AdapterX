@@ -13,11 +13,8 @@ import pro.siper.adapterx.ViewHolderX
 /**
  * Created by Siper on 18.06.2017.
  */
-class Item1(context: Context) : ItemX<ViewHolder1>() {
-    val context: Context
-    init {
-        this.context = context
-    }
+class Item1(val context: Context) : ItemX<ViewHolder1>() {
+
     override fun onClick(item: BaseItem, position: Int) {
         Toast.makeText(context, "Item 1 clicked at position: $position", Toast.LENGTH_SHORT).show()
     }
@@ -29,15 +26,12 @@ class Item1(context: Context) : ItemX<ViewHolder1>() {
     override fun getLayout(): Int = R.layout.item1
 
     override fun bindView(holder: ViewHolder1) {
-        holder.title!!.text = "Item 1 at position: ${holder.adapterPosition}"
+        holder.title.text = "Item 1 at position: ${holder.adapterPosition}"
     }
 
     override fun createView(parent: View): RecyclerView.ViewHolder = ViewHolder1(parent, this)
 }
 
-class ViewHolder1(itemView: View?, item: Item1): ViewHolderX(itemView, item) {
-    val title: TextView?
-    init {
-        title = itemView!!.findViewById(R.id.title) as TextView
-    }
+class ViewHolder1(itemView: View, item: Item1): ViewHolderX(itemView, item) {
+    val title: TextView = itemView.findViewById(R.id.title) as TextView
 }
