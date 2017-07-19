@@ -42,6 +42,13 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         registerViewType(item)
     }
 
+    fun addItems(items: List<BaseItem>) {
+        for(item in items) {
+            registerViewType(item)
+            dataset.add(item)
+        }
+    }
+
     private fun registerViewType(item: BaseItem) {
         if(!registredViews.containsKey(item.getLayout())) {
             registredViews.put(item.getLayout(), item)
