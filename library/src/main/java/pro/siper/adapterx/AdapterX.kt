@@ -42,19 +42,19 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         registerViewType(item)
     }
 
-    fun registerViewType(item: BaseItem) {
+    private fun registerViewType(item: BaseItem) {
         if(!registredViews.containsKey(item.getLayout())) {
             registredViews.put(item.getLayout(), item)
         }
     }
 
-    fun unRegisterViewType(item: BaseItem) {
+    private fun unRegisterViewType(item: BaseItem) {
         if(registredViews.containsKey(item.getLayout())) {
             registredViews.remove(item.getLayout())
         }
     }
 
-    fun unRegiterAllViewTypes() {
+    private fun unRegiterAllViewTypes() {
         registredViews.clear()
     }
 
