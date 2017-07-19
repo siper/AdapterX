@@ -73,7 +73,7 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         dataset.remove(item)
     }
 
-    fun removeAll() {
+    fun removeAllItems() {
         dataset.clear()
         unRegisterAllViewTypes()
     }
