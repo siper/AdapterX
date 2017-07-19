@@ -61,7 +61,7 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    private fun unRegiterAllViewTypes() {
+    private fun unRegisterAllViewTypes() {
         registredViews.clear()
     }
 
@@ -75,6 +75,6 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     fun removeAll() {
         dataset.clear()
-        unRegiterAllViewTypes()
+        unRegisterAllViewTypes()
     }
 }
