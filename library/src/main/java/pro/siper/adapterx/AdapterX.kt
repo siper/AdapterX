@@ -7,16 +7,12 @@ import android.view.ViewGroup
 /**
  * Created by Siper on 16.06.2017.
  */
-class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    var dataset: MutableList<BaseItem> = arrayListOf()
-    var registredViews: HashMap<Int, BaseItem> = HashMap()
+class AdapterX(var dataset: MutableList<BaseItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
-    constructor(dataset: MutableList<BaseItem> = arrayListOf()) {
-        this.dataset = dataset
+    init {
         if(dataset.isNotEmpty()) {
-            for (item in dataset) {
-                registerViewType(item)
-            }
+            dataset.forEach { item -> registerViewType(item) }
         }
     }
 
@@ -34,7 +30,7 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
-        return registredViews[viewType]!!.createView(view)
+        return registeredViews[viewType]!!.createView(view)
     }
 
     fun addItem(item: BaseItem) {
@@ -50,19 +46,19 @@ class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private fun registerViewType(item: BaseItem) {
-        if(!registredViews.containsKey(item.getLayout())) {
-            registredViews.put(item.getLayout(), item)
+        if(!registeredViews.containsKey(item.getLayout())) {
+            registeredViews.put(item.getLayout(), item)
         }
     }
 
     private fun unRegisterViewType(item: BaseItem) {
-        if(registredViews.containsKey(item.getLayout())) {
-            registredViews.remove(item.getLayout())
+        if(registeredViews.containsKey(item.getLayout())) {
+            registeredViews.remove(item.getLayout())
         }
     }
 
     private fun unRegisterAllViewTypes() {
-        registredViews.clear()
+        registeredViews.clear()
     }
 
     fun removeItem(position: Int) {
