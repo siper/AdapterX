@@ -8,7 +8,7 @@ import android.view.ViewGroup
  * Created by Siper on 16.06.2017.
  */
 class AdapterX(var dataset: MutableList<BaseItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var registeredViews: HashMap<Int, BaseItem> = HashMap()
+    private var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
     init {
         if(dataset.isNotEmpty()) {
