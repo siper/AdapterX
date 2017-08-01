@@ -7,16 +7,13 @@ import android.view.ViewGroup
 /**
  * Created by Siper on 16.06.2017.
  */
-class AdapterX : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    var dataset: MutableList<BaseItem> = arrayListOf()
+class AdapterX(var dataset: MutableList<BaseItem> = arrayListOf())
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
-    constructor(dataset: MutableList<BaseItem> = arrayListOf()) {
-        this.dataset = dataset
+    init {
         if(dataset.isNotEmpty()) {
-            for (item in dataset) {
-                registerViewType(item)
-            }
+            dataset.forEach { registerViewType(it) }
         }
     }
 
