@@ -6,7 +6,7 @@ import android.view.View
 /**
  * Created by Siper on 19.06.2017.
  */
-abstract class ItemX<T: ViewHolderX>: BaseItem {
+abstract class ItemX<in T: ViewHolderX>: BaseItem {
     abstract override fun onClick(item: BaseItem, position: Int)
     abstract override fun onLongClick(item: BaseItem, position: Int)
     abstract override fun getLayout(): Int
