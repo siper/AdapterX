@@ -7,21 +7,16 @@ import android.view.View
  * Created by Siper on 21.06.2017.
  */
 
-abstract class ViewHolderX(itemView: View?, item: BaseItem) : RecyclerView.ViewHolder(itemView), View.OnClickListener,
-        View.OnLongClickListener {
+abstract class ViewHolderX(itemView: View?, item: BaseItem) : RecyclerView.ViewHolder(itemView) {
     val item: BaseItem
     init {
-        itemView!!.setOnClickListener(this)
-        itemView.setOnLongClickListener(this)
+        itemView!!.setOnClickListener{v -> item.onClick(item, adapterPosition)}
+        itemView.setOnLongClickListener(object : View.OnLongClickListener {
+            override fun onLongClick(v: View?): Boolean {
+                item.onLongClick(item, adapterPosition)
+                return true
+            }
+        })
         this.item = item
-    }
-
-    override fun onClick(v: View?) {
-        item.onClick(item, adapterPosition)
-    }
-
-    override fun onLongClick(v: View?): Boolean {
-        item.onClick(item, adapterPosition)
-        return true
     }
 }
