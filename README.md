@@ -24,7 +24,7 @@ dependencies {
 
 ### 1. Create your ViewHolder
 ```
-class ViewHolder1(itemView: View, item: Item1): ViewHolderX(itemView, item) {
+class ViewHolder1(itemView: View): ViewHolder(itemView) {
     val title: TextView = itemView.findViewById(R.id.title) as TextView
 }
 ```
@@ -32,21 +32,13 @@ class ViewHolder1(itemView: View, item: Item1): ViewHolderX(itemView, item) {
 ```
 class Item1(val context: Context) : ItemX<ViewHolder1>() {
 
-    override fun onClick(item: BaseItem, position: Int) {
-        Toast.makeText(context, "Item 1 clicked at position: $position", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onLongClick(item: BaseItem, position: Int) {
-        Toast.makeText(context, "Item 1 long clicked at position: $position", Toast.LENGTH_SHORT).show()
-    }
-
     override fun getLayout(): Int = R.layout.item1
 
     override fun bindView(holder: ViewHolder1) {
         holder.title.text = "Item 1 at position: ${holder.adapterPosition}"
     }
 
-    override fun createView(parent: View): RecyclerView.ViewHolder = ViewHolder1(parent, this)
+    override fun createView(parent: View): RecyclerView.ViewHolder = ViewHolder1(parent)
 }
 ```
 ### 3. Init you adapter and add items
@@ -56,6 +48,23 @@ recyclerView.adapter = adapter
 adapter.addItem(Item1(this))
 ```   
 
+### 4. Or init it with listener
+```
+val adapter = AdapterX(listener = object : OnClickListenerX {
+            override fun onClick(item: BaseItem, position: Int) {
+                when (item) {
+                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position clicked",
+                            Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onLongClick(item: BaseItem, position: Int) {
+                when(item) {
+                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position long clicked",
+                            Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+```
 # License
 
 ```

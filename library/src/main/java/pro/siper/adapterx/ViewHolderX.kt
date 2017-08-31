@@ -9,12 +9,14 @@ import android.view.View
 
 abstract class ViewHolderX(itemView: View, var item: BaseItem) : RecyclerView.ViewHolder(itemView) {
     init {
-        itemView.setOnClickListener { item.onClick(item, adapterPosition) }
-        itemView.setOnLongClickListener ( object : View.OnLongClickListener{
-            override fun onLongClick(p0: View?): Boolean {
-                item.onLongClick(item, adapterPosition)
-                return true
-            }
-        })
+//        itemView.setOnClickListener {
+//            item.onClick(item.adapter!!.dataset[adapterPosition], adapterPosition)
+//        }
+//        itemView.setOnLongClickListener ( object : View.OnLongClickListener{
+//            override fun onLongClick(p0: View?): Boolean {
+//                item.onLongClick(item.adapter!!.dataset[adapterPosition], adapterPosition)
+//                return true
+//            }
+//        })
     }
 }

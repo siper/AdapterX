@@ -6,7 +6,7 @@ import android.view.View
 /**
  * Created by Siper on 16.06.2017.
  */
-interface BaseItem : OnClickListenerX {
+interface BaseItem  {
     fun getLayout(): Int
     fun bindHolder(holder: RecyclerView.ViewHolder?)
     fun createView(parent: View): RecyclerView.ViewHolder
