@@ -2,12 +2,14 @@ package pro.siper.adapterx
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 
 /**
  * Created by Siper on 16.06.2017.
  */
-class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf(),
+               val listener: OnClickListenerX? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
     init {
@@ -30,7 +32,22 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
-        return registeredViews[viewType]!!.createView(view)
+        val holder = registeredViews[viewType]!!.createView(view)
+        listener?.let {
+            holder.itemView.setOnClickListener {
+                val position = holder.adapterPosition
+                listener.onClick(dataset[position], position)
+            }
+            holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(p0: View?): Boolean {
+                    val position = holder.adapterPosition
+                    listener.onLongClick(dataset[position], position)
+                    return true
+                }
+            })
+
+        }
+        return holder
     }
 
     fun addItem(item: BaseItem) {
