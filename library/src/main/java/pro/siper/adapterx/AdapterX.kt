@@ -2,16 +2,13 @@ package pro.siper.adapterx
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 
 /**
  * Created by Siper on 16.06.2017.
  */
-class AdapterX(var dataset: MutableList<BaseItem> = arrayListOf(),
-               val listener: OnClickListenerX? = null)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var registeredViews: HashMap<Int, BaseItem> = HashMap()
+class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
     init {
         if(dataset.isNotEmpty()) {
@@ -33,22 +30,7 @@ class AdapterX(var dataset: MutableList<BaseItem> = arrayListOf(),
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
-        val holder = registeredViews[viewType]!!.createView(view)
-        listener?.let {
-            holder.itemView.setOnClickListener {
-                val position = holder.adapterPosition
-                listener.onClick(dataset[position], position)
-            }
-            holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-                override fun onLongClick(p0: View?): Boolean {
-                    val position = holder.adapterPosition
-                    listener.onLongClick(dataset[position], position)
-                    return true
-                }
-            })
-
-        }
-        return holder
+        return registeredViews[viewType]!!.createView(view)
     }
 
     fun addItem(item: BaseItem) {
@@ -61,6 +43,12 @@ class AdapterX(var dataset: MutableList<BaseItem> = arrayListOf(),
             registerViewType(item)
             dataset.add(item)
         }
+    }
+
+    fun swapDataset(newDataset: List<BaseItem>) {
+        unRegisterAllViewTypes()
+        newDataset.forEach { registerViewType(it) }
+        dataset = newDataset.toMutableList()
     }
 
     private fun registerViewType(item: BaseItem) {
