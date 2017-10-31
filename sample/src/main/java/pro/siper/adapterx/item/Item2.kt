@@ -6,10 +6,8 @@ import android.widget.TextView
 import pro.siper.adapterx.ItemX
 import pro.siper.adapterx.R
 
-/**
- * Created by Siper on 18.06.2017.
- */
 class Item2(val title: String) : ItemX<ViewHolder2>() {
+    override fun getTag(): Int = 1
 
     override fun getLayout(): Int = R.layout.item2
 

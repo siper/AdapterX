@@ -5,6 +5,7 @@ import android.view.View
 
 
 interface BaseItem  {
+    fun getTag(): Int
     fun getLayout(): Int
     fun bindHolder(holder: RecyclerView.ViewHolder?)
     fun createView(parent: View): RecyclerView.ViewHolder
