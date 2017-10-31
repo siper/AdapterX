@@ -7,26 +7,29 @@ import android.view.ViewGroup
 
 
 @Suppress("DEPRECATION")
-class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    var dataset: MutableList<BaseItem> = mutableListOf()
     private var registeredViews: HashMap<Int, BaseItem> = HashMap()
 
     private var mOnClickListener: OnClickListenerX? = null
     private var mOnItemClickListener: OnItemClickListenerX? = null
 
-    constructor(dataset: MutableList<BaseItem> = mutableListOf(),
+    constructor(dataset: MutableList<BaseItem>) : this() {
+        this.dataset = dataset
+        if(dataset.isNotEmpty()) {
+            dataset.forEach { registerViewType(it) }
+        }
+    }
+
+    constructor(dataset: MutableList<BaseItem>,
                 listener: OnItemClickListenerX? = null) : this(dataset) {
         this.mOnItemClickListener = listener
     }
 
-    constructor(dataset: MutableList<BaseItem> = mutableListOf(),
+    @Deprecated(message = "OnClickListener deprecated use OnItemClickListenerX instead")
+    constructor(dataset: MutableList<BaseItem>,
                 listener: OnClickListenerX? = null) : this(dataset) {
         this.mOnClickListener = listener
-    }
-
-    init {
-        if(dataset.isNotEmpty()) {
-            dataset.forEach { registerViewType(it) }
-        }
     }
 
     override fun getItemCount(): Int {
