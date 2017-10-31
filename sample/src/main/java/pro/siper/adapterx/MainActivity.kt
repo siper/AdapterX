@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.Toast
 import pro.siper.adapterx.item.Item1
 import pro.siper.adapterx.item.Item2
+import pro.siper.adapterx.x.AdapterX
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,23 +16,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = AdapterX(object : OnItemClickListenerX {
-            override fun onItemClick(item: BaseItem, position: Int) {
-                when (item) {
-                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position clicked",
-                            Toast.LENGTH_SHORT).show()
-                    is Item2 -> Toast.makeText(applicationContext, "Item 2 (${item.title}) at position: $position long clicked",
-                            Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onItemLongClick(item: BaseItem, position: Int) {
-                when(item) {
-                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position long clicked",
-                            Toast.LENGTH_SHORT).show()
-                    is Item2 -> Toast.makeText(applicationContext, "Item 2 (${item.title}) at position: $position long clicked",
-                            Toast.LENGTH_SHORT).show()
-                }
-            }
+        val adapter = AdapterX()
+        adapter.addTypedOnItemLongClickListener(1, {
+            item: Item1, position: Int -> Toast.makeText(applicationContext,
+                "Item 1 (${item.title}) at position: $position long clicked", Toast.LENGTH_SHORT).show()
         })
         recyclerView.adapter = adapter
         adapter.addItem(Item1("Monkey"))

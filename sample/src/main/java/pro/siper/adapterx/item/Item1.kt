@@ -3,11 +3,11 @@ package pro.siper.adapterx.item
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
-import pro.siper.adapterx.ItemX
+import pro.siper.adapterx.x.ItemX
 import pro.siper.adapterx.R
 
 class Item1(val title: String) : ItemX<ViewHolder1>() {
-    override fun getTag(): Int = 2
+    override fun getTag(): Int = 1
 
     override fun getLayout(): Int = R.layout.item1
 
