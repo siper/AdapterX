@@ -6,9 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 
 
-class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf(),
-               val listener: OnClickListenerX? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+@Suppress("DEPRECATION")
+class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var registeredViews: HashMap<Int, BaseItem> = HashMap()
+
+    private var mOnClickListener: OnClickListenerX? = null
+    private var mOnItemClickListener: OnItemClickListenerX? = null
+
+    constructor(dataset: MutableList<BaseItem> = mutableListOf(),
+                listener: OnItemClickListenerX? = null) : this(dataset) {
+        this.mOnItemClickListener = listener
+    }
+
+    constructor(dataset: MutableList<BaseItem> = mutableListOf(),
+                listener: OnClickListenerX? = null) : this(dataset) {
+        this.mOnClickListener = listener
+    }
 
     init {
         if(dataset.isNotEmpty()) {
@@ -31,19 +44,31 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf(),
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(viewType, parent, false)
         val holder = registeredViews[viewType]!!.createView(view)
-        listener?.let {
+        mOnItemClickListener?.let {
             holder.itemView.setOnClickListener {
                 val position = holder.adapterPosition
-                listener.onClick(dataset[position], position)
+                mOnItemClickListener?.onItemClick(dataset[position], position)
             }
             holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
                 override fun onLongClick(p0: View?): Boolean {
                     val position = holder.adapterPosition
-                    listener.onLongClick(dataset[position], position)
+                    mOnItemClickListener?.onItemLongClick(dataset[position], position)
                     return true
                 }
             })
-
+        }
+        mOnClickListener?.let {
+            holder.itemView.setOnClickListener {
+                val position = holder.adapterPosition
+                mOnClickListener?.onClick(dataset[position], position)
+            }
+            holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+                override fun onLongClick(p0: View?): Boolean {
+                    val position = holder.adapterPosition
+                    mOnClickListener?.onLongClick(dataset[position], position)
+                    return true
+                }
+            })
         }
         return holder
     }

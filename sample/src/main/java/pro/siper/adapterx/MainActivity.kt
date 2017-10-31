@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = AdapterX(listener = object : OnClickListenerX {
-            override fun onClick(item: BaseItem, position: Int) {
+        val adapter = AdapterX(listener = object : OnItemClickListenerX {
+            override fun onItemClick(item: BaseItem, position: Int) {
                 when (item) {
                     is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position clicked",
                             Toast.LENGTH_SHORT).show()
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT).show()
                 }
             }
-            override fun onLongClick(item: BaseItem, position: Int) {
+            override fun onItemLongClick(item: BaseItem, position: Int) {
                 when(item) {
                     is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position long clicked",
                             Toast.LENGTH_SHORT).show()
