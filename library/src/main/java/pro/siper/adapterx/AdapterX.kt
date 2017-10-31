@@ -49,13 +49,11 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerV
                 val position = holder.adapterPosition
                 mOnItemClickListener?.onItemClick(dataset[position], position)
             }
-            holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-                override fun onLongClick(p0: View?): Boolean {
-                    val position = holder.adapterPosition
-                    mOnItemClickListener?.onItemLongClick(dataset[position], position)
-                    return true
-                }
-            })
+            holder.itemView.setOnLongClickListener {
+                val position = holder.adapterPosition
+                mOnItemClickListener?.onItemLongClick(dataset[position], position)
+                true
+            }
         }
         if (mOnItemClickListener != null) {
             mOnClickListener?.let {
@@ -63,13 +61,11 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerV
                     val position = holder.adapterPosition
                     mOnClickListener?.onClick(dataset[position], position)
                 }
-                holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-                    override fun onLongClick(p0: View?): Boolean {
-                        val position = holder.adapterPosition
-                        mOnClickListener?.onLongClick(dataset[position], position)
-                        return true
-                    }
-                })
+                holder.itemView.setOnLongClickListener {
+                    val position = holder.adapterPosition
+                    mOnClickListener?.onLongClick(dataset[position], position)
+                    true
+                }
             }
         }
         return holder
