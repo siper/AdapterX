@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-/**
- * Created by Siper on 16.06.2017.
- */
+
 class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf(),
                val listener: OnClickListenerX? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var registeredViews: HashMap<Int, BaseItem> = HashMap()
