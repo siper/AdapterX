@@ -57,18 +57,20 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerV
                 }
             })
         }
-        mOnClickListener?.let {
-            holder.itemView.setOnClickListener {
-                val position = holder.adapterPosition
-                mOnClickListener?.onClick(dataset[position], position)
-            }
-            holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
-                override fun onLongClick(p0: View?): Boolean {
+        if (mOnItemClickListener != null) {
+            mOnClickListener?.let {
+                holder.itemView.setOnClickListener {
                     val position = holder.adapterPosition
-                    mOnClickListener?.onLongClick(dataset[position], position)
-                    return true
+                    mOnClickListener?.onClick(dataset[position], position)
                 }
-            })
+                holder.itemView.setOnLongClickListener(object : View.OnLongClickListener {
+                    override fun onLongClick(p0: View?): Boolean {
+                        val position = holder.adapterPosition
+                        mOnClickListener?.onLongClick(dataset[position], position)
+                        return true
+                    }
+                })
+            }
         }
         return holder
     }
