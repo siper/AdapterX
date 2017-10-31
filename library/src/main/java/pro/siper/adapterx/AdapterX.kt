@@ -14,7 +14,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var mOnClickListener: OnClickListenerX? = null
     private var mOnItemClickListener: OnItemClickListenerX? = null
 
-    constructor(dataset: MutableList<BaseItem>) : this() {
+    constructor(dataset: MutableList<BaseItem> = mutableListOf()) : this() {
         this.dataset = dataset
         if(dataset.isNotEmpty()) {
             dataset.forEach { registerViewType(it) }
