@@ -55,7 +55,7 @@ class AdapterX(var dataset: MutableList<BaseItem> = mutableListOf()) : RecyclerV
                 true
             }
         }
-        if (mOnItemClickListener != null) {
+        if (mOnItemClickListener == null) {
             mOnClickListener?.let {
                 holder.itemView.setOnClickListener {
                     val position = holder.adapterPosition
