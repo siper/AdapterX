@@ -17,12 +17,7 @@ buildscript {
 }
 
 allprojects {
-    buildDir = "${rootProject.name}/${project.name}/build"
     repositories {
         jcenter()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
