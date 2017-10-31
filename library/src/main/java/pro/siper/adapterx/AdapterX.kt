@@ -21,6 +21,10 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    constructor(listener: OnItemClickListenerX? = null) : this() {
+        this.mOnItemClickListener = listener
+    }
+
     constructor(dataset: MutableList<BaseItem>,
                 listener: OnItemClickListenerX? = null) : this(dataset) {
         this.mOnItemClickListener = listener

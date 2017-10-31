@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val adapter = AdapterX(listener = object : OnItemClickListenerX {
+        val adapter = AdapterX(object : OnItemClickListenerX {
             override fun onItemClick(item: BaseItem, position: Int) {
                 when (item) {
                     is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position clicked",
