@@ -1,6 +1,6 @@
 # AdapterX [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AdapterX-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/5918) [![Build Status](https://travis-ci.org/siper/AdapterX.svg?branch=master)](https://travis-ci.org/siper/AdapterX)
 
-Kotlin multiview adapter for RecyclerView
+Simple multiview adapter for RecyclerView written in Kotlin
 
 # Installation
 
@@ -13,11 +13,10 @@ allprojects {
 	}
 }
 ```
-
 ### 2. Add the dependency
 ```
 dependencies {
-	compile 'com.github.siper:AdapterX:2.0.0'
+	compile 'com.github.siper:AdapterX:2.0.1'
 }
 ```
 
@@ -29,12 +28,10 @@ class ViewHolder1(itemView: View): ViewHolder(itemView) {
     val title: TextView = itemView.findViewById(R.id.title) as TextView
 }
 ```
-
 ### 2. Create you own item
 ```
 class Item1(val context: Context) : ItemX<ViewHolder1>() {
-    // override this if you use same layout in different items
-    // override fun getTag(): Int
+
     override fun getLayout(): Int = R.layout.item1
 
     override fun bindView(holder: ViewHolder1) {
@@ -44,43 +41,55 @@ class Item1(val context: Context) : ItemX<ViewHolder1>() {
     override fun createView(parent: View): RecyclerView.ViewHolder = ViewHolder1(parent)
 }
 ```
-
 ### 3. Init you adapter and add items
 ```
 var adapter: AdapterX = AdapterX()
 recyclerView.adapter = adapter
 adapter.addItem(Item1(this))
-```   
-
-### 4. Add typed click listeners
-```
-adapter.addTypedOnItemLongClickListener(1, {
-            item: Item1, position: Int -> Toast.makeText(applicationContext,
-                "Item 1 (${item.title}) at position: $position long clicked", Toast.LENGTH_SHORT).show()
-        })
 ```
 
-### 5. Or use one click listener for all items
+# Other
+
+### OnClickListener for all items
 ```
 adapter.setOnItemClickListener(object : BaseItemClickListener {
-            override fun onItemClick(item: BaseItem, position: Int) {
+            override fun onClick(item: BaseItem, position: Int) {
                 when (item) {
-                    is Item1 -> Toast.makeText(applicationContext,
-                            "Item 1 (${item.title}) at position: $position clicked", Toast.LENGTH_SHORT).show()
-                    is Item2 -> Toast.makeText(applicationContext,
-                            "Item 2 (${item.title}) at position: $position clicked", Toast.LENGTH_SHORT).show()
+                    is Item1 -> /* Item1 Clicked */
                 }
             }
-
-            override fun onItemLongClick(item: BaseItem, position: Int) {}
+            override fun onLongClick(item: BaseItem, position: Int) {
+                when(item) {
+                    is Item2 -> /* Item2 long clicked */
+                }
+            }
         })
 ```
+### TypedOnItemClickListener for specific item type
+```
+adapter.addTypedOnItemClickListener(Item1.getTag(), object : ItemClickListenerX<Item1> {
+            override fun onItemClick(item: Item1, position: Int) {
+                 // Item1 Clicked
+            }
+      }
+)
+```
+or
+```
+adapter.addTypedOnItemClickListener(Item1.getTag(), { item: Item1, position: Int -> /* Item1 Clicked */ } )
+```
+# Third-party libraries used in sample project
+
+* [Picasso](http://square.github.io/picasso/)
+* [Retrofit2](http://square.github.io/retrofit/)
+* [Gson](https://github.com/google/gson)
 
 # License
+
 ```
 MIT License
 
-Copyright (c) 2017 Siper
+Copyright (c) 2017 Kirill Zhukov (Siper)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
