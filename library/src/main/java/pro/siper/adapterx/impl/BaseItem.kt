@@ -1,4 +1,4 @@
-package pro.siper.adapterx
+package pro.siper.adapterx.impl
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
