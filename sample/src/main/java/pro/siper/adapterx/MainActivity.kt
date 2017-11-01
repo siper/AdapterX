@@ -8,10 +8,11 @@ import android.support.v7.widget.RecyclerView
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import pro.siper.adapterx.model.adapter.item.BigImageItem
-import pro.siper.adapterx.model.adapter.item.SmallImagRightItem
+import pro.siper.adapterx.model.adapter.item.SmallImageRightItem
 import pro.siper.adapterx.model.adapter.item.SmallImageLeftItem
 import pro.siper.adapterx.model.api.UnsplashApi
 import pro.siper.adapterx.model.api.UnsplashItem
+import pro.siper.adapterx.x.AdapterX
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = AdapterX()
         recyclerView.adapter = adapter
         val call = getUnsplashApi(
-                getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_APPLICATION_ID)
+                getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
         call.enqueue(object : Callback<List<UnsplashItem>> {
             override fun onFailure(call: Call<List<UnsplashItem>>?, t: Throwable?) {}
 
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                             adapter.addItem(SmallImageLeftItem(
                                     getPicasso(this@MainActivity), list[i]))
                         } else {
-                            adapter.addItem(SmallImagRightItem(
+                            adapter.addItem(SmallImageRightItem(
                                     getPicasso(this@MainActivity), list[i]))
                         }
                     }

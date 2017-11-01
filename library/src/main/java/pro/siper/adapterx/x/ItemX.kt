@@ -1,7 +1,8 @@
-package pro.siper.adapterx
+package pro.siper.adapterx.x
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import pro.siper.adapterx.impl.BaseItem
 
 
 abstract class ItemX<in T : RecyclerView.ViewHolder> : BaseItem {

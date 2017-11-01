@@ -3,10 +3,10 @@ package pro.siper.adapterx.model.adapter.item
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.squareup.picasso.Picasso
-import pro.siper.adapterx.ItemX
 import pro.siper.adapterx.R
 import pro.siper.adapterx.model.adapter.viewholder.BigImageViewHolder
 import pro.siper.adapterx.model.api.UnsplashItem
+import pro.siper.adapterx.x.ItemX
 
 class BigImageItem(val picasso: Picasso, val unsplashItem: UnsplashItem) : ItemX<BigImageViewHolder>() {
     override fun getLayout(): Int = R.layout.big_image_item
