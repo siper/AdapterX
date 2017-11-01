@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AdapterX</string>
+    <string name="unsplash_api_key">295c8ef8cf56b4af9a4d3d960758f0daa2941011a5b123519be9c760d38ac131</string>
 </resources>

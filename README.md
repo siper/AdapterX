@@ -16,7 +16,7 @@ allprojects {
 ### 2. Add the dependency
 ```
 dependencies {
-	compile 'com.github.siper:AdapterX:2.0.1'
+	compile 'com.github.siper:AdapterX:2.0.2'
 }
 ```
 

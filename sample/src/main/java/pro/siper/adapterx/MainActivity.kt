@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = AdapterX()
         recyclerView.adapter = adapter
         call = getUnsplashApi(
-                getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
+                getRetrofit(Gson())).listPhotos(getString(R.string.unsplash_api_key))
         call.enqueue(object : Callback<List<UnsplashItem>> {
             override fun onFailure(call: Call<List<UnsplashItem>>?, t: Throwable?) {}
 
