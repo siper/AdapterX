@@ -1,9 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+def api_key = hasProperty('unsplashApiKey') ? unsplashApiKey: System.getenv('unsplashApiKey')
+
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.3'
+
     defaultConfig {
         applicationId "pro.siper.adapterx.sample"
         minSdkVersion 14
@@ -14,7 +17,7 @@ android {
     }
     buildTypes {
         buildTypes.each {
-            it.buildConfigField 'String', 'UNSPLASH_API_APPLICATION_ID', unsplashApiApplicationId
+            it.buildConfigField 'String', 'UNSPLASH_API_KEY', api_key
         }
         release {
             minifyEnabled false
