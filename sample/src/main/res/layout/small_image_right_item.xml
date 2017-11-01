@@ -5,7 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     app:cardCornerRadius="0dp"
-    app:cardPreventCornerOverlap="true">
+    app:cardPreventCornerOverlap="true"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +20,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/created_at"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -37,7 +39,7 @@
             android:id="@+id/image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:layout_gravity="end|center"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>

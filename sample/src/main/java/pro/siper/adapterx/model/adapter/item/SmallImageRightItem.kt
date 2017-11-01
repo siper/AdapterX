@@ -15,7 +15,8 @@ class SmallImageRightItem(val picasso: Picasso, val unsplashItem: UnsplashItem) 
     override fun bindView(holder: SmallImageViewHolder) {
         with(unsplashItem) {
             picasso.load(urls?.regular).into(holder.image)
-            holder.description.text = "$description"
+            val date = createdAt?.substringBefore('T')
+            holder.createdAt.text = "$date"
             holder.widthHeight.text = "${width}x${height}"
         }
     }

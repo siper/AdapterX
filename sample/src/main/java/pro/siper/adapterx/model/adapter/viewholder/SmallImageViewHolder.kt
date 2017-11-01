@@ -8,6 +8,6 @@ import pro.siper.adapterx.R
 
 class SmallImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val image: ImageView = itemView.findViewById(R.id.image) as ImageView
-    val description: TextView = itemView.findViewById(R.id.description) as TextView
+    val createdAt: TextView = itemView.findViewById(R.id.created_at) as TextView
     val widthHeight: TextView = itemView.findViewById(R.id.width_height) as TextView
 }

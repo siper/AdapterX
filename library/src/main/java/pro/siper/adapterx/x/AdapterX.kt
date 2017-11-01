@@ -45,9 +45,10 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(
-                this.viewTypes[viewType]!!.getLayout(), parent, false)
-        val holder = this.viewTypes[viewType]!!.createView(view)
+        val view = LayoutInflater
+                .from(parent?.context)
+                .inflate(viewTypes[viewType]!!.getLayout(), parent, false)
+        val holder = viewTypes[viewType]!!.createView(view)
         if (itemClickListener != null || itemClickListeners.isNotEmpty()
                 || itemLongClickListeners.isNotEmpty()) {
             holder.itemView.setOnClickListener {
