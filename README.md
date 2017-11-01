@@ -68,9 +68,9 @@ val adapter = AdapterX(listener = object : OnClickListenerX {
 
 # Libraries used in sample project
 
-[Picasso](http://square.github.io/picasso/)
-[Retrofit2](http://square.github.io/retrofit/)
-[Gson](https://github.com/google/gson)
+* [Picasso](http://square.github.io/picasso/)
+* [Retrofit2](http://square.github.io/retrofit/)
+* [Gson](https://github.com/google/gson)
 
 # License
 
