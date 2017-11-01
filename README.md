@@ -16,7 +16,7 @@ allprojects {
 ### 2. Add the dependency
 ```
 dependencies {
-	compile 'com.github.siper:AdapterX:1.0'
+	compile 'com.github.siper:AdapterX:2.0.1'
 }
 ```
 
@@ -46,27 +46,39 @@ class Item1(val context: Context) : ItemX<ViewHolder1>() {
 var adapter: AdapterX = AdapterX()
 recyclerView.adapter = adapter
 adapter.addItem(Item1(this))
-```   
-
-### 4. Or init it with listener
 ```
-val adapter = AdapterX(listener = object : OnClickListenerX {
+
+# Other
+
+### OnClickListener for all items
+```
+adapter.setOnItemClickListener(object : BaseItemClickListener {
             override fun onClick(item: BaseItem, position: Int) {
                 when (item) {
-                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position clicked",
-                            Toast.LENGTH_SHORT).show()
+                    is Item1 -> /* Item1 Clicked */
                 }
             }
             override fun onLongClick(item: BaseItem, position: Int) {
                 when(item) {
-                    is Item1 -> Toast.makeText(applicationContext, "Item 1 (${item.title}) at position: $position long clicked",
-                            Toast.LENGTH_SHORT).show()
+                    is Item2 -> /* Item2 long clicked */
                 }
             }
         })
 ```
-
-# Libraries used in sample project
+### TypedOnItemClickListener for specific item type
+```
+adapter.addTypedOnItemClickListener(Item1.getTag(), object : ItemClickListenerX<Item1> {
+            override fun onItemClick(item: Item1, position: Int) {
+                 // Item1 Clicked
+            }
+      }
+)
+```
+or
+```
+adapter.addTypedOnItemClickListener(Item1.getTag(), { item: Item1, position: Int -> /* Item1 Clicked */ } )
+```
+# Third-party libraries used in sample project
 
 * [Picasso](http://square.github.io/picasso/)
 * [Retrofit2](http://square.github.io/retrofit/)
@@ -77,7 +89,7 @@ val adapter = AdapterX(listener = object : OnClickListenerX {
 ```
 MIT License
 
-Copyright (c) 2017 Siper
+Copyright (c) 2017 Kirill Zhukov (Siper)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
