@@ -22,6 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+    lateinit var call: Call<List<UnsplashItem>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = AdapterX()
         recyclerView.adapter = adapter
-        val call = getUnsplashApi(
+        call = getUnsplashApi(
                 getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
         call.enqueue(object : Callback<List<UnsplashItem>> {
             override fun onFailure(call: Call<List<UnsplashItem>>?, t: Throwable?) {}
@@ -58,7 +59,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!call.isCanceled) {
+            call.cancel()
+        }
     }
 
     private fun getRetrofit(gson: Gson): Retrofit {
