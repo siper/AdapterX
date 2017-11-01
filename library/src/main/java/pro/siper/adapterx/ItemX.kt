@@ -6,7 +6,7 @@ import android.view.View
 
 abstract class ItemX<in T : RecyclerView.ViewHolder> : BaseItem {
     abstract override fun getLayout(): Int
-    abstract override fun getTag(): Int
+    override fun getTag(): Int = getLayout()
     abstract fun bindView(holder: T)
 
     override fun bindHolder(holder: RecyclerView.ViewHolder?) {
@@ -14,5 +14,5 @@ abstract class ItemX<in T : RecyclerView.ViewHolder> : BaseItem {
         bindView(holder as T)
     }
 
-    abstract override fun createView(parent: View): RecyclerView.ViewHolder
+    abstract override fun createView(itemView: View): RecyclerView.ViewHolder
 }
