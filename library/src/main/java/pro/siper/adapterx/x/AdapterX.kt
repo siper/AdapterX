@@ -147,7 +147,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @Suppress("MemberVisibilityCanPrivate")
     fun <T : BaseItem> addTypedOnItemClickListener(itemTag: Int,
-                                                                           listener: ItemClickListenerX<T>) {
+                                                   listener: ItemClickListenerX<T>) {
         if (!itemClickListeners.containsKey(itemTag)) {
             itemClickListeners.put(itemTag, listener)
         }
@@ -155,7 +155,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @Suppress("MemberVisibilityCanPrivate")
     fun <T : BaseItem> addTypedOnItemLongClickListener(itemTag: Int,
-                                                                               listener: ItemLongClickListenerX<T>) {
+                                                       listener: ItemLongClickListenerX<T>) {
         if (!itemLongClickListeners.containsKey(itemTag)) {
             itemLongClickListeners.put(itemTag, listener)
         }
@@ -163,7 +163,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @Suppress("MemberVisibilityCanPrivate")
     fun <T : BaseItem> addTypedOnItemClickListener(itemTag: Int,
-                                                                           listener: (item: T, position: Int) -> Unit) {
+                                                   listener: (item: T, position: Int) -> Unit) {
         addTypedOnItemClickListener(itemTag, object : ItemClickListenerX<T> {
             override fun onItemClick(item: T, position: Int) {
                 listener(item, position)
@@ -173,7 +173,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @Suppress("MemberVisibilityCanPrivate")
     fun <T : BaseItem> addTypedOnItemLongClickListener(itemTag: Int,
-                                                                               listener: (item: T, position: Int) -> Unit) {
+                                                       listener: (item: T, position: Int) -> Unit) {
         addTypedOnItemLongClickListener(itemTag, object : ItemLongClickListenerX<T> {
             override fun onItemLongClick(item: T, position: Int) {
                 listener(item, position)
