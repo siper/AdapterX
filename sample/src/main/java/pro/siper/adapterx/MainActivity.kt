@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.widget.ProgressBar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import pro.siper.adapterx.model.adapter.item.BigImageItem
-import pro.siper.adapterx.model.adapter.item.SmallImageRightItem
 import pro.siper.adapterx.model.adapter.item.SmallImageLeftItem
+import pro.siper.adapterx.model.adapter.item.SmallImageRightItem
 import pro.siper.adapterx.model.api.UnsplashApi
 import pro.siper.adapterx.model.api.UnsplashItem
 import pro.siper.adapterx.x.AdapterX
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerView: RecyclerView = findViewById(R.id.list) as RecyclerView
+        val progress: ProgressBar = findViewById(R.id.progress) as ProgressBar
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = AdapterX()
         recyclerView.adapter = adapter
@@ -49,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                                     getPicasso(this@MainActivity), list[i]))
                         }
                     }
+                    recyclerView.visibility = View.VISIBLE
+                    progress.visibility = View.GONE
                     adapter.notifyDataSetChanged()
                 }
             }
