@@ -1,0 +1,26 @@
+package pro.siper.adapterx.model.adapter.item
+
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import com.squareup.picasso.Picasso
+import pro.siper.adapterx.ItemX
+import pro.siper.adapterx.R
+import pro.siper.adapterx.model.adapter.viewholder.SmallImageViewHolder
+import pro.siper.adapterx.model.api.UnsplashItem
+
+/**
+ * Created by Zhukov on 01.11.2017.
+ */
+class SmallImagRightItem(val picasso: Picasso, val unsplashItem: UnsplashItem) : ItemX<SmallImageViewHolder>() {
+    override fun getLayout(): Int = R.layout.small_image_right_item
+
+    override fun bindView(holder: SmallImageViewHolder) {
+        with(unsplashItem) {
+            picasso.load(urls?.regular).into(holder.image)
+            holder.description.text = "$description"
+            holder.widthHeight.text = "${width}x${height}"
+        }
+    }
+
+    override fun createView(itemView: View): RecyclerView.ViewHolder = SmallImageViewHolder(itemView)
+}

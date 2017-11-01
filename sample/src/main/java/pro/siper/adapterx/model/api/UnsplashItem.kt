@@ -3,7 +3,7 @@ package pro.siper.adapterx.model.api
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Result {
+class UnsplashItem {
 
     @SerializedName("id")
     @Expose
