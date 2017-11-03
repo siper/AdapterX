@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import pro.siper.adapterx.model.adapter.item.BigImageItem
@@ -22,7 +23,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-    lateinit var call: Call<List<UnsplashItem>>
+    private val call: Call<List<UnsplashItem>>
+            = getUnsplashApi(getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +34,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         val adapter = AdapterX()
         recyclerView.adapter = adapter
-        call = getUnsplashApi(
-                getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
         call.enqueue(object : Callback<List<UnsplashItem>> {
             override fun onFailure(call: Call<List<UnsplashItem>>?, t: Throwable?) {}
 
@@ -43,14 +43,11 @@ class MainActivity : AppCompatActivity() {
                     val list = response.body()!!
                     for (i in list.indices) {
                         if (i % 3 == 0) {
-                            adapter.addItem(BigImageItem(
-                                    getPicasso(this@MainActivity), list[i]))
+                            adapter.addItem(BigImageItem(getPicasso(), list[i]))
                         } else if (i % 2 == 0) {
-                            adapter.addItem(SmallImageLeftItem(
-                                    getPicasso(this@MainActivity), list[i]))
+                            adapter.addItem(SmallImageLeftItem(getPicasso(), list[i]))
                         } else {
-                            adapter.addItem(SmallImageRightItem(
-                                    getPicasso(this@MainActivity), list[i]))
+                            adapter.addItem(SmallImageRightItem(getPicasso(), list[i]))
                         }
                     }
                     recyclerView.visibility = View.VISIBLE
@@ -59,6 +56,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        adapter.addTypedOnItemClickListener {
+            item: BigImageItem, position: Int ->  toast(message = "Big item clicked")
+        }
+        adapter.addTypedOnItemLongClickListener {
+            item: SmallImageLeftItem, position: Int ->
+            toast(message = "SmallImageLeftItem item long clicked")
+        }
     }
 
     override fun onDestroy() {
@@ -79,7 +83,11 @@ class MainActivity : AppCompatActivity() {
         return retrofit.create(UnsplashApi::class.java)
     }
 
-    private fun getPicasso(context: Context): Picasso {
+    private fun getPicasso(context: Context = this): Picasso {
         return Picasso.with(context)
+    }
+
+    private fun toast(context: Context = this, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
