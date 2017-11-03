@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
     private val call: Call<List<UnsplashItem>>
-            = getUnsplashApi(getRetrofit(Gson())).listPhotos(BuildConfig.UNSPLASH_API_KEY)
+            = getUnsplashApi(getRetrofit(Gson())).listPhotos(getString(R.string.unsplash_api_key))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

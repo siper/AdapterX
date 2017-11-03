@@ -16,7 +16,7 @@ allprojects {
 ### 2. Add the dependency
 ```
 dependencies {
-	compile 'com.github.siper:AdapterX:2.0.2'
+	compile 'com.github.siper:AdapterX:2.1.0'
 }
 ```
 
@@ -67,7 +67,7 @@ adapter.setOnItemClickListener(object : BaseItemClickListener {
 ```
 ### TypedOnItemClickListener for specific item type
 ```
-adapter.addTypedOnItemClickListener(Item1.getTag(), object : ItemClickListenerX<Item1> {
+adapter.addTypedOnItemClickListener(object : ItemClickListenerX<Item1> {
             override fun onItemClick(item: Item1, position: Int) {
                  // Item1 Clicked
             }
@@ -76,7 +76,7 @@ adapter.addTypedOnItemClickListener(Item1.getTag(), object : ItemClickListenerX<
 ```
 or
 ```
-adapter.addTypedOnItemClickListener(Item1.getTag(), { item: Item1, position: Int -> /* Item1 Clicked */ } )
+adapter.addTypedOnItemClickListener { item: Item1, position: Int -> /* Item1 Clicked */ }
 ```
 # Third-party libraries used in sample project
 
