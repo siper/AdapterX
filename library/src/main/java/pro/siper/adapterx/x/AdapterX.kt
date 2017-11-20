@@ -1,5 +1,6 @@
 package pro.siper.adapterx.x
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -155,24 +156,13 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         })
     }
 
-    @Deprecated(
-            message = "Use addTypedOnItemClickListener(listener: ItemClickListenerX<T>) instead")
     inline fun <reified T : BaseItem> addTypedOnItemClickListener(
-            itemTag: Int, listener: ItemClickListenerX<T>) {
+            crossinline listener: (item: T) -> Unit) {
         if (!itemClickListeners.containsKey(T::class)) {
-            itemClickListeners.put(T::class, listener)
+            itemClickListeners.put(T::class, object : OnlyItemClickListenerX<T> {
+                override fun onItemClick(item: T) { listener(item) }
+            })
         }
-    }
-
-    @Deprecated(
-            message = "Use addTypedOnItemClickListener{(item: T, position: Int) -> Unit)} instead")
-    inline fun <reified T : BaseItem> addTypedOnItemClickListener(
-            itemTag: Int, crossinline listener: (item: T, position: Int) -> Unit) {
-        addTypedOnItemClickListener(object : ItemClickListenerX<T> {
-            override fun onItemClick(item: T, position: Int) {
-                listener(item, position)
-            }
-        })
     }
 
     fun <T : ItemClickListener> removeTypedOnItemClickListener(listener: T) {
@@ -188,7 +178,7 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inline fun <reified T : BaseItem> addTypedOnItemLongClickListener(
-            listener: ItemLongClickListenerX<T>) {
+            listener: ItemLongClickListenerX<T>){
         if (!itemLongClickListeners.containsKey(T::class)) {
             itemLongClickListeners.put(T::class, listener)
         }
@@ -203,22 +193,14 @@ class AdapterX() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         })
     }
 
-    @Deprecated(message = "Use addTypedOnItemLongClickListener(" +
-            "listener: ItemLongClickListenerX<T>) instead")
-    inline fun <reified T : BaseItem> addTypedOnItemLongClickListener(itemTag: Int,
-                                                       listener: ItemLongClickListenerX<T>) {
-        addTypedOnItemLongClickListener(listener)
-    }
-
-    @Deprecated(message = "Use addTypedOnItemLongClickListener{" +
-            "(item: T, position: Int) -> Unit} instead")
     inline fun <reified T : BaseItem> addTypedOnItemLongClickListener(
-            itemTag: Int, crossinline listener: (item: T, position: Int) -> Unit) {
-        addTypedOnItemLongClickListener(object : ItemLongClickListenerX<T> {
-            override fun onItemLongClick(item: T, position: Int) {
-                listener(item, position)
+            crossinline listener: (item: T) -> Unit) {
+        if (!itemLongClickListeners.containsKey(T::class)) {
+            itemLongClickListeners.put(T::class, object : OnlyItemLongClickListenerX<T> {
+                override fun onItemLongClick(item: T) { listener(item) }
             }
-        })
+            )
+        }
     }
 
     fun <T : ItemLongClickListener> removeTypedOnItemLongClickListener(listener: T) {
